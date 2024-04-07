@@ -46,18 +46,7 @@ app.get("/health", async(req, res) => {
     })
 })
 
-app.get("/notes/:id", async(req, res) => {
-    const {id} = req.params;
 
-    const note =await Note.findById(id);
-
-    res.json({
-        success: true,
-        message: "Server is running",
-        data: note
-
-    })
-})
 
 app.post("/notes", async(req, res) => {
     const {title, content, category} = req.body;
@@ -102,12 +91,27 @@ app.post("/notes", async(req, res) => {
     })
 })
 
-app.get("/notes", (req, res) => {
+// app.get("/notes/:id", async(req, res) => {
+//     const {id} = req.params;
+
+//     const note =await Note.findById(id);
+
+//     res.json({
+//         success: true,
+//         message: "Server is running",
+//         data: note
+
+//     })
+// })
+
+app.get("/notes", async (req, res) => {
+
+    const note = await Note.find();
 
     res.json({
         success: true,
         message: "Note fetched sucessfully",
-        data: []
+        data: note
     })
     
 })
